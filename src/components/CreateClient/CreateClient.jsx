@@ -1,34 +1,36 @@
-import React, { useEffect } from "react";
-import { Button, Form, Input, Modal, Radio, Select, notification } from "antd";
-import styles from "./CreateModal.module.scss";
-import apiInstance from "../../api/index.js";
-import { useMutation } from "react-query";
+import React from "react";
+import { Form, Input } from "antd";
 import ModalItem from "../ModalItem/ModalItem";
+import {
+  useCreateClient,
+  useDeleteClient,
+  useUpdateClient,
+} from "../../hooks/clients";
 
 const CreateClient = ({ onClose, ...props }) => {
   const [form] = Form.useForm();
 
-  const { mutate } = useMutation(apiInstance.createClient, {
-    onSuccess: () => {
-      notification.success({ message: "Клиент успешно добавлен" });
-      onClose();
-    },
-    onError: (e) => notification.error({ message: e.message }),
+  const { mutate: createClient } = useCreateClient({
+    success: onClose,
   });
 
-  const onFinish = async (values) => {
-    const { phoneNumber, email } = values;
+  const { mutate: deleteClient } = useDeleteClient({
+    success: onClose,
+  });
 
-    if (!phoneNumber && !email) {
-      notification.error({ message: "Введите номер телефона или почту" });
-      return;
-    }
-
-    await mutate(values);
-  };
+  const { mutate: updateClient } = useUpdateClient({
+    success: onClose,
+  });
 
   return (
-    <ModalItem {...props} title="Клиент" onCreate={onFinish} onClose={onClose}>
+    <ModalItem
+      {...props}
+      title="Клиент"
+      onCreate={createClient}
+      onUpdate={updateClient}
+      onClose={onClose}
+      onDelete={deleteClient}
+    >
       <Form.Item label="Фамилия" name="surname">
         <Input />
       </Form.Item>

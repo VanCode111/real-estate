@@ -7,7 +7,13 @@ const createClient = (body) =>
   axiosInstance.post("clients/addClient", { body });
 
 const updateClient = (body) =>
-  axiosInstance.post("clients/addClient", { body });
+  axiosInstance.post("clients/editClient", { body });
+
+const deleteClient = (id) =>
+  axiosInstance.get("clients/deleteClient", { params: { id } });
+
+const findClient = (params) =>
+  axiosInstance.get("clients/findClient", { params });
 
 const getAllRealtors = (body) =>
   axiosInstance.get("realtors/getAllRealtors", { body });
@@ -29,4 +35,6 @@ export default {
   getAllRealtors,
   getAllClients,
   deleteRealtor,
+  findClient,
+  deleteClient,
 };

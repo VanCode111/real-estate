@@ -1,9 +1,11 @@
-import React, { useMemo } from "react";
-import { useQuery } from "react-query";
+import React, { useMemo, useState } from "react";
+import { useQuery, useMutation } from "react-query";
 import CreateRieltor from "../CreateRieltor/CreateRieltor";
 import TableElems from "../TableElems/TableElems";
 import apiInstance from "../../api";
 import CreateClient from "../CreateClient/CreateClient";
+import FioSearch from "../FioSearch/FioSearch";
+import { useGetClients } from "../../hooks/clients/useGetClients";
 
 const columns = [
   {
@@ -34,10 +36,8 @@ const columns = [
 ];
 
 const Clients = () => {
-  const { data, isLoading } = useQuery(
-    "getAllClients",
-    apiInstance.getAllClients
-  );
+  const [filters, setFilters] = useState();
+  const { data, isLoading } = useGetClients(filters);
 
   const dataSource = useMemo(
     () => data?.data?.map((item) => ({ key: item.id, ...item })) || [],
@@ -46,12 +46,18 @@ const Clients = () => {
 
   return (
     <>
+      <FioSearch onSearch={setFilters} onResetSearch={() => setFilters(null)} />
       <TableElems
         columns={columns}
         data={dataSource}
         isLoading={isLoading}
         updateModal={(data, onClose) => (
-          <CreateClient initialData={data} isOpen={data} onClose={onClose} />
+          <CreateClient
+            isEditMode={true}
+            initialData={data}
+            isOpen={data}
+            onClose={onClose}
+          />
         )}
       />
     </>

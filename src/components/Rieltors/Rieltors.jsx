@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import CreateRieltor from "../CreateRieltor/CreateRieltor";
 import TableElems from "../TableElems/TableElems";
 import apiInstance from "../../api";
+import FioSearch from "../FioSearch/FioSearch";
 
 const columns = [
   {
@@ -57,6 +58,7 @@ const Rieltors = () => {
 
   return (
     <>
+      <FioSearch />
       <TableElems
         columns={columns}
         data={dataSource}
