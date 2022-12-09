@@ -13,9 +13,8 @@ const CreateRieltor = ({
   children,
   onDelete,
   initialData = null,
+  form,
 }) => {
-  const [form] = Form.useForm();
-
   const isEditMode = !!initialData;
 
   const deleteItem = () => {

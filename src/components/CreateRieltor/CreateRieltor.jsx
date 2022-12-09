@@ -6,6 +6,8 @@ import { useMutation, useQueryClient } from "react-query";
 import ModalItem from "../ModalItem/ModalItem";
 
 const CreateRieltor = ({ onClose, ...props }) => {
+  const [form] = Form.useForm();
+
   const queryClient = useQueryClient();
   const { mutate: create } = useMutation(apiInstance.createRieltor, {
     onSuccess: () => {
@@ -42,6 +44,7 @@ const CreateRieltor = ({ onClose, ...props }) => {
       onCreate={create}
       onUpdate={update}
       onDelete={deleteRealtor}
+      form={form}
     >
       <Form.Item label="Фамилия" name="surname">
         <Input />

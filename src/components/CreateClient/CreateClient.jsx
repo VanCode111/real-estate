@@ -30,6 +30,7 @@ const CreateClient = ({ onClose, ...props }) => {
       onUpdate={updateClient}
       onClose={onClose}
       onDelete={deleteClient}
+      form={form}
     >
       <Form.Item label="Фамилия" name="surname">
         <Input />

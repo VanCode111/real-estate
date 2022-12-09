@@ -1,4 +1,5 @@
 import { axiosInstance } from "./utils";
+import estateApi from "./estate";
 
 const getAllClients = (body) =>
   axiosInstance.get("clients/getAllClients", { body });

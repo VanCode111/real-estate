@@ -5,6 +5,7 @@ import CreateRieltor from "../../components/CreateRieltor/CreateRieltor";
 import TableElems from "../../components/TableElems/TableElems";
 import Rieltors from "../../components/Rieltors/Rieltors";
 import Clients from "../../components/Clients/Clients";
+import Estate from "../../components/Estate/Estate";
 
 const Main = () => {
   const [isCreateClientOpen, setCreateClientOpen] = useState(null);
@@ -40,6 +41,11 @@ const Main = () => {
             label: `Клиенты`,
             key: "2",
             children: <Clients />,
+          },
+          {
+            label: `Недвижимость`,
+            key: "3",
+            children: <Estate />,
           },
         ]}
       />
