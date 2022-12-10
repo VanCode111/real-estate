@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import TableElems from "../../../TableElems/TableElems";
-import EstateModal from "../../../EstateModal/EstateModal";
+import CreateClient from "../../../CreateClient/CreateClient";
 
 const columns = [
   {
@@ -34,30 +34,25 @@ const columns = [
     key: "Coordinate_longitude",
   },
   {
-    title: "Floor",
-    dataIndex: "Floor",
-    key: "Floor",
-  },
-  {
-    title: "Rooms",
-    dataIndex: "Rooms",
-    key: "Rooms",
-  },
-  {
     title: "TotalArea",
     dataIndex: "TotalArea",
     key: "TotalArea",
   },
+  {
+    title: "TotalFloors",
+    dataIndex: "TotalFloors",
+    key: "TotalFloors",
+  },
 ];
 
-const Apartments = ({ data, isLoading }) => {
+const Houses = ({ data, isLoading }) => {
   return (
     <TableElems
       columns={columns}
-      data={data}
+      data={[]}
       isLoading={isLoading}
       updateModal={(data, onClose) => (
-        <EstateModal
+        <CreateClient
           isEditMode={true}
           initialData={data}
           isOpen={data}
@@ -68,4 +63,4 @@ const Apartments = ({ data, isLoading }) => {
   );
 };
 
-export default Apartments;
+export default Houses;

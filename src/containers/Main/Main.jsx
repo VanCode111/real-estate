@@ -6,6 +6,8 @@ import TableElems from "../../components/TableElems/TableElems";
 import Rieltors from "../../components/Rieltors/Rieltors";
 import Clients from "../../components/Clients/Clients";
 import Estate from "../../components/Estate/Estate";
+import Requiremets from "components/Requirements/Requirements";
+import Proposal from "components/Proposal/Proposal";
 
 const Main = () => {
   const [isCreateClientOpen, setCreateClientOpen] = useState(null);
@@ -46,6 +48,16 @@ const Main = () => {
             label: `Недвижимость`,
             key: "3",
             children: <Estate />,
+          },
+          {
+            label: `Потребности`,
+            key: "4",
+            children: <Requiremets />,
+          },
+          {
+            label: `Предложения`,
+            key: "5",
+            children: <Proposal />,
           },
         ]}
       />

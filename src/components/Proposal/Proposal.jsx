@@ -8,37 +8,27 @@ import Houses from "./components/Houses/Houses";
 import Lands from "./components/Lands/Lands";
 import Filters from "components/Filters/Filters";
 import { Form, Input } from "antd";
-import FiltersModule from "./components/FiltersModule/FiltersModule";
 
-const Estate = () => {
-  const [filters, setFilters] = useState();
-
-  const { data, isLoading } = useGetAllEstate(filters);
-
+const Proposal = () => {
   return (
     <>
-      <FiltersModule applyFilters={setFilters} />
       <Tabs
         defaultActiveKey="1"
         items={[
           {
-            label: `Апартаменты`,
+            label: `Квартира`,
             key: "1",
-            children: (
-              <Apartments isLoading={isLoading} data={data?.data?.Apartments} />
-            ),
+            children: <Apartments />,
           },
           {
-            label: `Дома`,
+            label: `Дом`,
             key: "2",
-            children: (
-              <Houses isLoading={isLoading} data={data?.data?.Houses} />
-            ),
+            children: <Houses />,
           },
           {
-            label: `Острова`,
+            label: `Земля`,
             key: "3",
-            children: <Lands isLoading={isLoading} data={data?.data?.Lands} />,
+            children: <Lands />,
           },
         ]}
       />
@@ -46,4 +36,4 @@ const Estate = () => {
   );
 };
 
-export default Estate;
+export default Proposal;

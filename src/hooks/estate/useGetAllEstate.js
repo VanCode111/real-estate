@@ -7,11 +7,11 @@ const checkFilters = (filters) => {
 
 const getEstateHandler = (filters) => {
   if (checkFilters(filters?.address)) {
-    return api.SearchByAddress;
+    return () => api.SearchByAddress(filters?.address);
   }
 
   if (checkFilters(filters?.district)) {
-    return api.SearchByAddress;
+    return () => api.SearchByAddress(filters?.district);
   }
 
   return api.getAllEstate;

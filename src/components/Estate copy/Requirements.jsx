@@ -15,6 +15,18 @@ const Estate = () => {
 
   const { data, isLoading } = useGetAllEstate(filters);
 
+  const dataSource = useMemo(
+    () =>
+      data?.data.reduce((acc, curr) => {
+        if (!acc[curr.estate_type]) {
+          acc[curr.estate_type] = [];
+        }
+
+        acc[curr.estate_type].push(curr);
+      }, {}) || {},
+    [data]
+  );
+
   return (
     <>
       <FiltersModule applyFilters={setFilters} />
@@ -25,20 +37,18 @@ const Estate = () => {
             label: `Апартаменты`,
             key: "1",
             children: (
-              <Apartments isLoading={isLoading} data={data?.data?.Apartments} />
+              <Apartments isLoading={isLoading} data={dataSource.apartments} />
             ),
           },
           {
-            label: `Дома`,
+            label: `Дом`,
             key: "2",
-            children: (
-              <Houses isLoading={isLoading} data={data?.data?.Houses} />
-            ),
+            children: <Houses isLoading={isLoading} data={dataSource.houses} />,
           },
           {
-            label: `Острова`,
+            label: `Земля`,
             key: "3",
-            children: <Lands isLoading={isLoading} data={data?.data?.Lands} />,
+            children: <Lands isLoading={isLoading} data={dataSource.lands} />,
           },
         ]}
       />

@@ -17,6 +17,7 @@ const TableElems = ({
   return (
     <>
       <Table
+        scroll
         rowClassName={styles.row}
         onRow={(record) => {
           return { onClick: () => setSelectedRow(record) };
