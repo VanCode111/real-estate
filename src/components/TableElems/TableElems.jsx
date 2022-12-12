@@ -11,13 +11,15 @@ const TableElems = ({
   data = [],
   isLoading,
   columns,
+  scroll,
+  scrollX,
 }) => {
   const [selectedRow, setSelectedRow] = useState(null);
 
   return (
     <>
       <Table
-        scroll
+        scroll={{ x: scrollX, y: 400 }}
         rowClassName={styles.row}
         onRow={(record) => {
           return { onClick: () => setSelectedRow(record) };

@@ -17,9 +17,10 @@ const isInteger = (rule, value, callback) => {
   }
 };
 
-const PositiveNumberInput = ({ name, required, label }) => {
+const PositiveNumberInput = ({ name, required, label, style }) => {
   return (
     <Form.Item
+      style={style}
       rules={[
         { required, message: "Обязательное поле" },
         { validator: minValidator },

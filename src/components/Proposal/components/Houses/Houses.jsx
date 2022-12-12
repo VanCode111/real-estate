@@ -1,58 +1,39 @@
 import React, { useMemo, useState } from "react";
 import TableElems from "../../../TableElems/TableElems";
 import CreateClient from "../../../CreateClient/CreateClient";
+import ProposalModal from "../ProposalModal/ProposalModal";
+import { useGetProposal } from "hooks/proposal/useGetProposal";
+import { prepareData } from "components/Proposal/utils";
+import { generateColumns } from "components/TableElems/utils";
+import { ESTATE_FIELDS, PROPOSAL_FIELDS } from "components/Proposal/consts";
+import { useGetHousesProposal } from "hooks/proposal/useGetHousesProposal";
 
 const columns = [
   {
-    title: "Address_City",
-    dataIndex: "Address_City",
-    key: "Address_City",
+    title: "Недвижимость",
+    dataIndex: "estate",
+    key: "estate",
+    children: generateColumns(ESTATE_FIELDS),
   },
   {
-    title: "Address_House",
-    dataIndex: "Address_House",
-    key: "Address_House",
-  },
-  {
-    title: "Address_Number",
-    dataIndex: "Address_Number",
-    key: "Address_Number",
-  },
-  {
-    title: "Address_Street",
-    dataIndex: "Address_Street",
-    key: "Address_Street",
-  },
-  {
-    title: "Coordinate_latitude",
-    dataIndex: "Coordinate_latitude",
-    key: "Coordinate_latitude",
-  },
-  {
-    title: "Coordinate_longitude",
-    dataIndex: "Coordinate_longitude",
-    key: "Coordinate_longitude",
-  },
-  {
-    title: "TotalArea",
-    dataIndex: "TotalArea",
-    key: "TotalArea",
-  },
-  {
-    title: "TotalFloors",
-    dataIndex: "TotalFloors",
-    key: "TotalFloors",
+    title: "Предложение",
+    dataIndex: "proposal",
+    key: "proposal",
+    children: generateColumns(PROPOSAL_FIELDS),
   },
 ];
 
-const Houses = ({ data, isLoading }) => {
+const Houses = () => {
+  const { data, isLoading } = useGetHousesProposal({ type: "houses" });
+  const dataSource = useMemo(() => prepareData(data), [data?.data]);
+
   return (
     <TableElems
       columns={columns}
-      data={[]}
+      data={dataSource}
       isLoading={isLoading}
       updateModal={(data, onClose) => (
-        <CreateClient
+        <ProposalModal
           isEditMode={true}
           initialData={data}
           isOpen={data}

@@ -15,6 +15,7 @@ const Apartments = ({ data, isLoading }) => {
     <TableElems
       columns={columns}
       data={data}
+      scrollX={2500}
       isLoading={isLoading}
       updateModal={(data, onClose) => (
         <RequirementsModal
