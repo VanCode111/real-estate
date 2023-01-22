@@ -5,9 +5,10 @@ import apiInstance from "../../api/index.js";
 import { useMutation, useQueryClient } from "react-query";
 import ModalItem from "../ModalItem/ModalItem";
 
-const CreateRieltor = ({ onClose, ...props }) => {
+const CreateRieltor = ({ onClose, initialData, ...props }) => {
   const [form] = Form.useForm();
 
+  console.log(initialData, "neww");
   const queryClient = useQueryClient();
   const { mutate: create } = useMutation(apiInstance.createRieltor, {
     onSuccess: () => {
@@ -41,8 +42,9 @@ const CreateRieltor = ({ onClose, ...props }) => {
       {...props}
       title="Риэлтор"
       onClose={onClose}
+      initialData={initialData}
       onCreate={create}
-      onUpdate={update}
+      onUpdate={(values) => update({ ...values, id: initialData.id })}
       onDelete={deleteRealtor}
       form={form}
     >

@@ -19,6 +19,7 @@ const Houses = ({ data, isLoading }) => {
       updateModal={(data, onClose) => (
         <RequirementsModal
           isEditMode={true}
+          isEdit
           initialData={data}
           isOpen={data}
           onClose={onClose}

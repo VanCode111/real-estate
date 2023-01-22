@@ -1,4 +1,5 @@
 export const ESTATE_FIELDS = {
+  id: { value: "id", label: "id" },
   Address_City: { value: "Address_City", label: "Город" },
   Address_House: { value: "Address_House", label: "Дом" },
   Address_Number: { value: "Address_Number", label: "Номер" },

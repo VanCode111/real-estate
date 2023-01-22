@@ -11,10 +11,9 @@ const proposalDelete = (params) =>
   axiosInstance.get("proposal/delete", { params });
 
 const proposalCreate = (body) =>
-  axiosInstance.post("proposal/create", { body });
+  axiosInstance.post("proposal/create", null, { params: body });
 
-const proposalUpdate = (body) =>
-  axiosInstance.post("proposal/update", { body });
+const proposalUpdate = (body) => axiosInstance.post("proposal/update", body);
 
 export default {
   getApartmentsProposal,

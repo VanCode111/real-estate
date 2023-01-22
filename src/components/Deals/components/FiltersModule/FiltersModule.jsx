@@ -39,23 +39,23 @@ const FiltersModule = ({ applyFilters }) => {
 
       {searchType === "address" && (
         <Filters resetFilters={resetFilters} applyFilters={onApplyFilters}>
-          <Form.Item label="Город" name="city">
+          <Form.Item label="city" name="city">
             <Input />
           </Form.Item>
-          <Form.Item label="Улица" name="street">
+          <Form.Item label="street" name="street">
             <Input />
           </Form.Item>
-          <Form.Item label="Дом" name="house">
+          <Form.Item label="house" name="house">
             <Input />
           </Form.Item>
-          <Form.Item label="Номер квартиры" name="number">
+          <Form.Item label="number" name="number">
             <Input />
           </Form.Item>
         </Filters>
       )}
       {searchType === "district" && (
         <Filters resetFilters={resetFilters} applyFilters={onApplyFilters}>
-          <Form.Item label="Район" name="district">
+          <Form.Item label="district" name="district">
             <Input />
           </Form.Item>
         </Filters>

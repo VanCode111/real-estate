@@ -7,6 +7,6 @@ import { useQuery } from "react-query";
 //     : apiInstance.getAllClients;
 // };
 
-export const useGetClients = () => {
-  return useQuery(["getAllDeals"], api.getAllDeals);
+export const useGetAllDeals = () => {
+  return useQuery(["GetAllDeals"], api.getAllDeals);
 };

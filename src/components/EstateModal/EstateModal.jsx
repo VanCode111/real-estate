@@ -45,22 +45,22 @@ const EstateModal = ({ onClose, initialData, ...props }) => {
       onDelete={deleteClient}
       form={form}
     >
-      <Form.Item label="Address_City" name="Address_City">
+      <Form.Item label="Город" name="Address_City">
         <Input />
       </Form.Item>
-      <Form.Item label="Address_House" name="Address_House">
+      <Form.Item label="Дом" name="Address_House">
         <Input />
       </Form.Item>
-      <Form.Item label="Address_Number" name="Address_Number">
+      <Form.Item label="Номер квартиры" name="Address_Number">
         <Input />
       </Form.Item>
-      <Form.Item label="Address_Street" name="Address_Street">
+      <Form.Item label="Улица" name="Address_Street">
         <Input />
       </Form.Item>
-      <Form.Item label="Coordinate_latitude" name="Coordinate_latitude">
+      <Form.Item label="Широта" name="Coordinate_latitude">
         <Input />
       </Form.Item>
-      <Form.Item label="Coordinate_longitude" name="Coordinate_longitude">
+      <Form.Item label="Долгота" name="Coordinate_longitude">
         <Input />
       </Form.Item>
       <Form.Item label="Тип недвижимости" name="type">
@@ -73,30 +73,30 @@ const EstateModal = ({ onClose, initialData, ...props }) => {
 
       {type === "houses" && (
         <>
-          <Form.Item label="TotalArea" name="TotalArea">
+          <Form.Item label="Площать" name="TotalArea">
             <Input />
           </Form.Item>
-          <Form.Item label="TotalFloors" name="TotalFloors">
+          <Form.Item label="Этажность" name="TotalFloor">
             <Input />
           </Form.Item>
         </>
       )}
       {type === "apartments" && (
         <>
-          <Form.Item label="Floor" name="Floor">
+          <Form.Item label="Этаж" name="Floor">
             <Input />
           </Form.Item>
-          <Form.Item label="Rooms" name="Rooms">
+          <Form.Item label="Количество комнат" name="Rooms">
             <Input />
           </Form.Item>
-          <Form.Item label="TotalArea" name="TotalArea">
+          <Form.Item label="Площадь" name="TotalArea">
             <Input />
           </Form.Item>
         </>
       )}
       {type === "lands" && (
         <>
-          <Form.Item label="TotalArea" name="TotalArea">
+          <Form.Item label="Площадь" name="TotalArea">
             <Input />
           </Form.Item>
         </>

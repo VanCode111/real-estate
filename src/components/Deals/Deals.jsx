@@ -11,21 +11,23 @@ import { Form, Input } from "antd";
 import FiltersModule from "./components/FiltersModule/FiltersModule";
 import RequirementsModal from "components/RequirementsModal/RequirementsModal";
 import CreateButton from "components/CreateButton/CreateButton";
+import { useGetAllDeals } from "hooks/deals/useGetAllDeals";
+import DealModal from "./components/DealModal/DealModal";
 
 const Requiremets = () => {
   const [filters, setFilters] = useState();
 
-  const { data, isLoading } = useGetAllRequirements(filters);
+  const { data, isLoading } = useGetAllDeals(filters);
 
   const dataSource = useMemo(() => {
     return (
       data?.data?.reduce((acc, curr) => {
         console.log(acc);
-        if (!acc[curr.estate_type]) {
-          acc[curr.estate_type] = [];
+        if (!acc[curr.type]) {
+          acc[curr.type] = [];
         }
 
-        acc[curr.estate_type].push(curr);
+        acc[curr.type].push(curr);
         return acc;
       }, {}) || {}
     );
@@ -34,9 +36,7 @@ const Requiremets = () => {
   return (
     <>
       <CreateButton
-        modal={(open, onClose) => (
-          <RequirementsModal isOpen={open} onClose={onClose} />
-        )}
+        modal={(open, onClose) => <DealModal isOpen={open} onClose={onClose} />}
       />
       <Tabs
         defaultActiveKey="1"

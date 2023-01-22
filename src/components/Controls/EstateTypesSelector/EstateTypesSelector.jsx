@@ -6,10 +6,10 @@ import { makeRieltorOptions } from "../utils";
 import { useGetClients } from "hooks/clients";
 import { ESTATE_TYPES } from "components/RequirementsModal/const";
 
-const EstateTypesSelector = ({ name }) => {
+const EstateTypesSelector = ({ name, disabled }) => {
   return (
     <Form.Item required label="Тип недвижимости" name={name}>
-      <Select>
+      <Select disabled={disabled}>
         {ESTATE_TYPES.map(({ value, label }) => (
           <Option value={value}>{label}</Option>
         ))}

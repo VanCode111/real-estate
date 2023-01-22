@@ -29,7 +29,19 @@ const housesFields = makeFields(HOUSES_FIELDS);
 
 const RequirementsModal = ({ onClose, initialData, ...props }) => {
   const [form] = Form.useForm();
-  const type = Form.useWatch("estate_type", form);
+  const type = Form.useWatch("type", form);
+  console.log(initialData);
+  initialData = useMemo(
+    () =>
+      initialData
+        ? {
+            ...initialData,
+            type: initialData.estate_type,
+            estate_type: undefined,
+          }
+        : null,
+    [initialData]
+  );
 
   const handleClose = () => {
     form.resetFields();
@@ -37,7 +49,7 @@ const RequirementsModal = ({ onClose, initialData, ...props }) => {
   };
 
   const usedInitialData = useMemo(
-    () => ({ ...initialData, type: DEFAULT_TYPE }),
+    () => (!initialData ? { ...initialData, type: DEFAULT_TYPE } : initialData),
     [initialData]
   );
 
@@ -59,7 +71,7 @@ const RequirementsModal = ({ onClose, initialData, ...props }) => {
       initialData={usedInitialData}
       title="Потребность"
       onCreate={createClient}
-      onUpdate={updateClient}
+      onUpdate={(values) => updateClient({ ...values, id: initialData.id })}
       onClose={handleClose}
       onDelete={deleteClient}
       form={form}
@@ -92,7 +104,7 @@ const RequirementsModal = ({ onClose, initialData, ...props }) => {
 
       <ClientsSelector name={FIELDS.client_id.value} />
 
-      <EstateTypesSelector name={FIELDS.estate_type.value} />
+      <EstateTypesSelector name="type" />
 
       {type === "houses" && housesFields}
       {type === "apartments" && apartmentsFields}

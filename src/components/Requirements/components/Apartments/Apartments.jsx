@@ -19,6 +19,7 @@ const Apartments = ({ data, isLoading }) => {
       isLoading={isLoading}
       updateModal={(data, onClose) => (
         <RequirementsModal
+          isEdit
           isEditMode={true}
           initialData={data}
           isOpen={data}

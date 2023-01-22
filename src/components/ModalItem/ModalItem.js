@@ -12,11 +12,10 @@ const CreateRieltor = ({
   title,
   children,
   onDelete,
+  isEdit,
   initialData = null,
   form,
 }) => {
-  const isEditMode = !!initialData;
-
   const deleteItem = () => {
     onDelete(initialData.id);
   };
@@ -37,21 +36,19 @@ const CreateRieltor = ({
         form={form}
         id="form"
         name="control-hooks"
-        onFinish={isEditMode ? onUpdate : onCreate}
+        onFinish={isEdit ? onUpdate : onCreate}
         labelCol={{ span: 8 }}
         layout="horizontal"
       >
         {children}
 
         <div className={styles.buttons}>
-          {initialData && (
+          {isEdit && (
             <Button danger onClick={deleteItem}>
               Удалить
             </Button>
           )}
-          <Button htmlType="submit">
-            {!isEditMode ? "Добавить" : "Обновить"}
-          </Button>
+          <Button htmlType="submit">{!isEdit ? "Добавить" : "Обновить"}</Button>
         </div>
       </Form>
     </Modal>

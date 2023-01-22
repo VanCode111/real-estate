@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Form, Input, Select } from "antd";
 import ModalItem from "components/ModalItem/ModalItem";
-
 import { DEFAULT_TYPE, ESTATE_TYPES } from "./const";
 import { FIELDS } from "components/Requirements/consts";
 import { makeFields } from "./utils";
@@ -21,16 +20,40 @@ import PositiveNumberInput from "components/Controls/PositiveNumberInput/Positiv
 import { useProposalCreate } from "hooks/proposal/useProposalCreate";
 import { useProposalDelete } from "hooks/proposal/useProposalDelete";
 import { useProposalUpdate } from "hooks/proposal/useProposalUpdate";
+import { PROPOSAL_FIELDS } from "components/Proposal/consts";
+import EstateSelector from "components/Controls/EstatesSelector/EstatesSelector";
+
+const ests = {
+  apartment: "apartments",
+  house: "houses",
+  lands: "lands",
+};
+
+const rests = {
+  apartments: "Apartments",
+  houses: "Houses",
+  lands: "Lands",
+};
 
 const { Option } = Select;
 
-const apartmentsFields = makeFields(APARTMENTS_FIELDS);
-const landFields = makeFields(LAND_FIELDS);
-const housesFields = makeFields(HOUSES_FIELDS);
-
-const ProposalModal = ({ onClose, initialData, ...props }) => {
+const ProposalModal = ({ onClose, initialData, type, ...props }) => {
   const [form] = Form.useForm();
-  const type = Form.useWatch("estate_type", form);
+  const typeEstate = Form.useWatch("type", form);
+  console.log(initialData, "neww");
+  initialData = useMemo(
+    () =>
+      initialData
+        ? {
+            ...initialData,
+            estate: `${initialData.type.toLowerCase()} ${initialData.id}`,
+            realtorId: initialData.realtor,
+            type: ests[initialData.type.toLowerCase()],
+            clientId: initialData.client,
+          }
+        : null,
+    [initialData]
+  );
 
   const handleClose = () => {
     form.resetFields();
@@ -38,7 +61,7 @@ const ProposalModal = ({ onClose, initialData, ...props }) => {
   };
 
   const usedInitialData = useMemo(
-    () => ({ ...initialData, type: DEFAULT_TYPE }),
+    () => (!initialData ? { ...initialData, type: DEFAULT_TYPE } : initialData),
     [initialData]
   );
 
@@ -54,50 +77,46 @@ const ProposalModal = ({ onClose, initialData, ...props }) => {
     success: handleClose,
   });
 
+  const onCreate = (values) => {
+    createClient({
+      ...values,
+    });
+  };
+
+  const onUpdate = (values) => {
+    values.estate = undefined;
+    updateClient({
+      ...values,
+      id: initialData.id,
+      oldType: initialData.type,
+    });
+  };
+
   return (
     <ModalItem
       {...props}
       initialData={usedInitialData}
-      title="Потребность"
+      title="Предложение"
       onCreate={createClient}
-      onUpdate={updateClient}
+      onUpdate={onUpdate}
       onClose={handleClose}
-      onDelete={deleteClient}
+      onDelete={(proposal_id) =>
+        deleteClient({ proposal_id, type: initialData.type })
+      }
       form={form}
     >
-      <TextInput
-        label={FIELDS.addres_city.label}
-        name={FIELDS.addres_city.value}
-      />
-      <TextInput
-        label={FIELDS.addres_house.label}
-        name={FIELDS.addres_house.value}
-      />
-      <TextInput
-        label={FIELDS.addres_number.label}
-        name={FIELDS.addres_number.value}
-      />
-      <TextInput
-        label={FIELDS.addres_street.label}
-        name={FIELDS.addres_street.value}
-      />
       <PositiveNumberInput
-        label={FIELDS.min_price.label}
-        name={FIELDS.min_price.value}
+        label={PROPOSAL_FIELDS.price.label}
+        name={PROPOSAL_FIELDS.price.value}
+        required
       />
-      <PositiveNumberInput
-        label={FIELDS.max_price.label}
-        name={FIELDS.max_price.value}
-      />
-      <RieltorsSelector name={FIELDS.realtor_id.value} />
+      <RieltorsSelector name={"realtorId"} />
 
-      <ClientsSelector name={FIELDS.client_id.value} />
+      <ClientsSelector name={"clientId"} />
 
-      <EstateTypesSelector name={FIELDS.estate_type.value} />
+      <EstateTypesSelector name="type" />
 
-      {type === "houses" && housesFields}
-      {type === "apartments" && apartmentsFields}
-      {type === "lands" && landFields}
+      <EstateSelector name={"estateId"} type={rests[typeEstate]} />
     </ModalItem>
   );
 };

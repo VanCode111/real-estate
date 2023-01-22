@@ -5,8 +5,7 @@ const getAllEstate = () => axiosInstance.get("estate/getAllEstate");
 const SearchByAddress = (params) =>
   axiosInstance.get("estate/SearchByAddress", { params });
 
-const createEstate = (body) =>
-  axiosInstance.post("estate/createEstate", { body });
+const createEstate = (body) => axiosInstance.post("estate/createEstate", body);
 
 const SearchByDistrict = (params) =>
   axiosInstance.get("estate/SearchByDistrict", { params });

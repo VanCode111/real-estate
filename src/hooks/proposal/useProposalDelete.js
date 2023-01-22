@@ -5,6 +5,6 @@ export const useProposalDelete = ({ success }) => {
   return useMutationExtended({
     apiHandler: api.proposalDelete,
     success,
-    key: "getProposal",
+    key: ["getProposalApartments", "getProposalHouses", "getProposalLands"],
   });
 };

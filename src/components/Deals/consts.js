@@ -1,5 +1,4 @@
 export const FIELDS = {
-  id: { value: "id", label: "id" },
   ["addres_city"]: { value: "addres_city", label: "Город" },
   ["addres_house"]: { value: "addres_house", label: "Дом" },
   ["addres_number"]: { value: "addres_number", label: "Номер" },

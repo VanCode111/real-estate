@@ -6,15 +6,16 @@ import apiInstance from "../../api";
 import CreateClient from "../CreateClient/CreateClient";
 import FioSearch from "../FioSearch/FioSearch";
 import { useGetClients } from "../../hooks/clients/useGetClients";
+import CreateButton from "components/CreateButton/CreateButton";
 
 const columns = [
   {
-    title: "Фамилия",
+    title: "Имя",
     dataIndex: "surname",
     key: "surname",
   },
   {
-    title: "Имя",
+    title: "Фамилия",
     dataIndex: "name",
     key: "name",
   },
@@ -46,6 +47,11 @@ const Clients = () => {
 
   return (
     <>
+      <CreateButton
+        modal={(open, onClose) => (
+          <CreateClient isOpen={open} onClose={onClose} />
+        )}
+      />
       <FioSearch onSearch={setFilters} onResetSearch={() => setFilters(null)} />
       <TableElems
         columns={columns}
@@ -53,7 +59,7 @@ const Clients = () => {
         isLoading={isLoading}
         updateModal={(data, onClose) => (
           <CreateClient
-            isEditMode={true}
+            isEdit={true}
             initialData={data}
             isOpen={data}
             onClose={onClose}

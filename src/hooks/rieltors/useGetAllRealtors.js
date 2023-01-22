@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 
 const getClientsHandler = (filters) => {
   return filters && Object.values(filters).some(Boolean)
-    ? () => apiInstance.find(filters)
+    ? () => apiInstance.findRealtor(filters)
     : apiInstance.getAllRealtors;
 };
 

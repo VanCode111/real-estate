@@ -8,29 +8,11 @@ import Clients from "../../components/Clients/Clients";
 import Estate from "../../components/Estate/Estate";
 import Requiremets from "components/Requirements/Requirements";
 import Proposal from "components/Proposal/Proposal";
+import Deals from "components/Deals/Deals";
 
 const Main = () => {
-  const [isCreateClientOpen, setCreateClientOpen] = useState(null);
-  const [isCreateRieltorOpen, setCreateRieltorOpen] = useState(null);
-
   return (
     <div className="main">
-      <Button onClick={() => setCreateClientOpen(true)}>
-        Добавить клиента
-      </Button>
-      <Button onClick={() => setCreateRieltorOpen(true)}>
-        Добавить риелтора
-      </Button>
-      <CreateClient
-        isOpen={isCreateClientOpen}
-        client={isCreateClientOpen?.user}
-        onClose={() => setCreateClientOpen(false)}
-      />
-      <CreateRieltor
-        isOpen={isCreateRieltorOpen?.user}
-        onClose={() => setCreateRieltorOpen(false)}
-      />
-
       <Tabs
         defaultActiveKey="1"
         items={[
@@ -58,6 +40,11 @@ const Main = () => {
             label: `Предложения`,
             key: "5",
             children: <Proposal />,
+          },
+          {
+            label: `Сделки`,
+            key: "6",
+            children: <Deals />,
           },
         ]}
       />

@@ -8,10 +8,17 @@ import Houses from "./components/Houses/Houses";
 import Lands from "./components/Lands/Lands";
 import Filters from "components/Filters/Filters";
 import { Form, Input } from "antd";
+import CreateButton from "components/CreateButton/CreateButton";
+import ProposalModal from "./components/ProposalModal/ProposalModal";
 
 const Proposal = () => {
   return (
     <>
+      <CreateButton
+        modal={(open, onClose) => (
+          <ProposalModal isOpen={open} onClose={onClose} />
+        )}
+      />
       <Tabs
         defaultActiveKey="1"
         items={[

@@ -4,15 +4,18 @@ import CreateRieltor from "../CreateRieltor/CreateRieltor";
 import TableElems from "../TableElems/TableElems";
 import apiInstance from "../../api";
 import FioSearch from "../FioSearch/FioSearch";
+import CreateButton from "components/CreateButton/CreateButton";
+import { useGetAllRealtors } from "hooks/rieltors/useGetAllRealtors";
+import { useState } from "react";
 
 const columns = [
   {
-    title: "Фамилия",
+    title: "Имя",
     dataIndex: "surname",
     key: "surname",
   },
   {
-    title: "Имя",
+    title: "Фамилия",
     dataIndex: "name",
     key: "name",
   },
@@ -46,25 +49,33 @@ const data = [
 ];
 
 const Rieltors = () => {
-  const { data, isLoading } = useQuery(
-    "getAllRealtors",
-    apiInstance.getAllRealtors
-  );
-
+  const [filters, setFilters] = useState();
+  const { data, isLoading } = useGetAllRealtors(filters);
   const dataSource = useMemo(
     () => data?.data?.map((item) => ({ key: item.id, ...item })) || [],
     [data]
   );
 
+  console.log(data, "aaaaa");
   return (
     <>
-      <FioSearch />
+      <CreateButton
+        modal={(open, onClose) => (
+          <CreateRieltor isOpen={open} onClose={onClose} />
+        )}
+      />
+      <FioSearch onSearch={setFilters} onResetSearch={() => setFilters(null)} />
       <TableElems
         columns={columns}
-        data={dataSource}
+        data={data?.data}
         isLoading={isLoading}
         updateModal={(data, onClose) => (
-          <CreateRieltor initialData={data} isOpen={data} onClose={onClose} />
+          <CreateRieltor
+            isEdit
+            initialData={data}
+            isOpen={data}
+            onClose={onClose}
+          />
         )}
       />
     </>

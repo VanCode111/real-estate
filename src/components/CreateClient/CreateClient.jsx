@@ -6,8 +6,9 @@ import {
   useDeleteClient,
   useUpdateClient,
 } from "../../hooks/clients";
+import { notification } from "antd";
 
-const CreateClient = ({ onClose, ...props }) => {
+const CreateClient = ({ onClose, initialData, ...props }) => {
   const [form] = Form.useForm();
 
   const { mutate: createClient } = useCreateClient({
@@ -22,12 +23,34 @@ const CreateClient = ({ onClose, ...props }) => {
     success: onClose,
   });
 
+  const onCreate = (values) => {
+    const { email, telephoneNumber } = values;
+
+    if (!email && !telephoneNumber) {
+      notification.error({ message: "Укажите email или телефон" });
+      return;
+    }
+    createClient({
+      ...values,
+      phoneNumber: values.telephoneNumber,
+      telephoneNumber: undefined,
+    });
+  };
+
   return (
     <ModalItem
       {...props}
+      initialData={initialData}
       title="Клиент"
-      onCreate={createClient}
-      onUpdate={updateClient}
+      onCreate={onCreate}
+      onUpdate={(values) =>
+        updateClient({
+          ...values,
+          id: String(initialData.id),
+          phoneNumber: values.telephoneNumber,
+          telephoneNumber: undefined,
+        })
+      }
       onClose={onClose}
       onDelete={deleteClient}
       form={form}
@@ -41,7 +64,7 @@ const CreateClient = ({ onClose, ...props }) => {
       <Form.Item label="Отчество" name="secondName">
         <Input />
       </Form.Item>
-      <Form.Item label="Номер телефона" name="phoneNumber">
+      <Form.Item label="Номер телефона" name="telephoneNumber">
         <Input />
       </Form.Item>
       <Form.Item label="Электронная почта" name="email">

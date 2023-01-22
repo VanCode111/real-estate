@@ -5,6 +5,6 @@ export const useProposalCreate = ({ success, type }) => {
   return useMutationExtended({
     apiHandler: api.proposalCreate,
     success,
-    key: "getProposal",
+    key: ["getProposalApartments", "getProposalHouses", "getProposalLands"],
   });
 };

@@ -4,37 +4,37 @@ import CreateClient from "../../../CreateClient/CreateClient";
 
 const columns = [
   {
-    title: "Address_City",
+    title: "Город",
     dataIndex: "Address_City",
     key: "Address_City",
   },
   {
-    title: "Address_House",
+    title: "Дом",
     dataIndex: "Address_House",
     key: "Address_House",
   },
   {
-    title: "Address_Number",
+    title: "Номер квартиры",
     dataIndex: "Address_Number",
     key: "Address_Number",
   },
   {
-    title: "Address_Street",
+    title: "Улица",
     dataIndex: "Address_Street",
     key: "Address_Street",
   },
   {
-    title: "Coordinate_latitude",
+    title: "Широта",
     dataIndex: "Coordinate_latitude",
     key: "Coordinate_latitude",
   },
   {
-    title: "Coordinate_longitude",
+    title: "Долгота",
     dataIndex: "Coordinate_longitude",
     key: "Coordinate_longitude",
   },
   {
-    title: "TotalArea",
+    title: "Площадь",
     dataIndex: "TotalArea",
     key: "TotalArea",
   },

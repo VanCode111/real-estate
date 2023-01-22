@@ -9,6 +9,8 @@ import Lands from "./components/Lands/Lands";
 import Filters from "components/Filters/Filters";
 import { Form, Input } from "antd";
 import FiltersModule from "./components/FiltersModule/FiltersModule";
+import EstateModal from "components/EstateModal/EstateModal";
+import CreateButton from "components/CreateButton/CreateButton";
 
 const Estate = () => {
   const [filters, setFilters] = useState();
@@ -17,26 +19,31 @@ const Estate = () => {
 
   return (
     <>
+      <CreateButton
+        modal={(open, onClose) => (
+          <EstateModal isOpen={open} onClose={onClose} />
+        )}
+      />
       <FiltersModule applyFilters={setFilters} />
       <Tabs
         defaultActiveKey="1"
         items={[
           {
-            label: `Апартаменты`,
+            label: `Квартира`,
             key: "1",
             children: (
               <Apartments isLoading={isLoading} data={data?.data?.Apartments} />
             ),
           },
           {
-            label: `Дома`,
+            label: `Дом`,
             key: "2",
             children: (
               <Houses isLoading={isLoading} data={data?.data?.Houses} />
             ),
           },
           {
-            label: `Острова`,
+            label: `Земля`,
             key: "3",
             children: <Lands isLoading={isLoading} data={data?.data?.Lands} />,
           },
